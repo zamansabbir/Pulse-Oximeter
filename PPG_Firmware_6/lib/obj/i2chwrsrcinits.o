@@ -1,0 +1,94 @@
+XH
+H 2 areas 1E global symbols
+M i2chwrsrcinits.asm
+S I2CHW_bStatus Ref0000
+S I2CHW_RsrcStatus Ref0000
+A text size 0 flags 0
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/UART.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/I2CHWMstr.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/I2CHWCommon.inc
+dbfunc 0 ? 0 I
+dbfile PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/PSoCGPIOINT.inc
+dbfunc 0 ? 0 I
+dbfile ./lib/PSoCAPI.inc
+dbfunc 0 ? 0 I
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbfile ./lib/PSoCGPIOINT.inc
+dbfunc 0 ? 0 I
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbfile ./lib/I2CHWCommon.inc
+dbfunc 0 ? 0 I
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbfile memory.inc
+dbfunc 0 ? 0 I
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbfile C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.inc
+dbfunc 0 ? 0 I
+A UserModules size 20 flags 0
+dbfile lib/i2chwrsrcinits.asm
+dbfunc 0 ? 0 I
+dbline 74 0
+dbline 8F 1
+dbline 2 3
+dbline 2 6
+dbline AD 9
+dbline 2 A
+dbline CA D
+dbline E9 E
+dbline EB 11
+dbline 1C 14
+dbline EE 17
+dbline 2 18
+dbline 142 1B
+dbline 1C 1C
+dbline 17F 1F
+S _I2CHW_EnableMstr Def000E
+S I2CHW_DisableMstr Def001C
+S _I2CHW_Start Def0000
+S _I2CHW_ClearInt Def000A
+S I2CHW_EnableInt Def0003
+S $sb$I2CHW_DisableMstr Def001C
+S $se$I2CHW_DisableMstr Def0020
+S I2CHW_ResumeInt Def0001
+S I2CHW_Stop Def0018
+S $sb$I2CHW_ResumeInt Def0001
+S _I2CHW_DisableMstr Def001C
+S $se$I2CHW_ResumeInt Def000A
+S _I2CHW_EnableInt Def0003
+S I2CHW_DisableInt Def0018
+S I2CHW_EnableMstr Def000E
+S _I2CHW_ResumeInt Def0001
+S $sb$I2CHW_DisableInt Def0018
+S $se$I2CHW_DisableInt Def001C
+S _I2CHW_Stop Def0018
+S $sb$I2CHW_EnableMstr Def000E
+S $se$I2CHW_EnableMstr Def0018
+S I2CHW_Start Def0000
+S I2CHW_ClearInt Def000A
+S $sb$I2CHW_Start Def0000
+S $se$I2CHW_Start Def0001
+S $sb$I2CHW_ClearInt Def000A
+S $se$I2CHW_ClearInt Def000E
+S _I2CHW_DisableInt Def0018
+T 00 00 7F 80 04 62 DD FE 43 DE 01 7F 62 DD FE 7F
+R 00 00 00 01
+T 00 0E 26 00 00 7F 26 00 00 7F 43 D6 02 7F 41 DE
+R 00 00 00 01 03 03 00 00 03 07 00 01
+T 00 1A FE 7F 41 D6 FD 7F
+R 00 00 00 01

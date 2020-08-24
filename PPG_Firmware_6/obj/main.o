@@ -1,0 +1,218 @@
+XH
+H 1 areas 16 global symbols
+M main.c
+S _UART_Start Ref0000
+S _I2CHW_EnableMstr Ref0000
+S _I2CHW_fSendStart Ref0000
+S _I2CHW_Start Ref0000
+S _I2CHW_SendStop Ref0000
+S __r0 Ref0000
+S _I2CHW_fSendRepeatStart Ref0000
+S _I2CHW_ClrWrStatus Ref0000
+S _I2CHW_fWrite Ref0000
+S _I2CHW_EnableInt Ref0000
+S _Delay10msTimes Ref0000
+S _I2CHW_bReadBusStatus Ref0000
+S _UART_PutChar Ref0000
+S _I2CHW_bRead Ref0000
+A text size 1BF flags 0
+dbfile ./main.c
+dbfile E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\main.c
+dbfunc e i2c_init 0 fV
+dbline FFFFFFFF 0
+dbline 27 0
+dbline 28 0
+dbline 29 4
+dbline 2A 7
+dbline FFFFFFFE B
+dbline 0 B
+dbfunc e PO_HR_Sensor_write_reg C fV
+dbsym l data FFFFFFFB c
+dbsym l addr FFFFFFFC c
+dbline FFFFFFFF C
+dbline 34 E
+dbline 35 E
+dbline 36 17
+dbline 37 1E
+dbline 38 24
+dbline 3A 28
+dbline 3A 28
+dbline 3B 34
+dbline FFFFFFFE 39
+dbline 0 3A
+dbfunc e PO_HR_Sensor_read_reg 3B fc
+dbsym l data 0 c
+dbsym l addr FFFFFFFC c
+dbline FFFFFFFF 3B
+dbline 43 3F
+dbline 45 3F
+dbline 46 48
+dbline 47 4E
+dbline 48 55
+dbline 49 5D
+dbline 4D 62
+dbline FFFFFFFE 64
+dbline 0 67
+dbfunc e PO_HR_Sensor_init 68 fV
+dbline FFFFFFFF 68
+dbline 55 68
+dbline 57 68
+dbline 58 70
+dbline 59 7A
+dbline 5A 82
+dbline 5B 8C
+dbline 5C 94
+dbline 5D 9E
+dbline 5E A6
+dbline 5F B0
+dbline 60 B8
+dbline FFFFFFFE C2
+dbline 0 C2
+dbfunc e PO_HR_Sensor_reset C3 fV
+dbline FFFFFFFF C3
+dbline 69 C3
+dbline 6A C3
+dbline FFFFFFFE CD
+dbline 0 CD
+dbfunc e PO_HR_Sensor_read_fifo CE fV
+dbsym l uch_temp 6 c
+dbsym l IR_Channel3 5 c
+dbsym l IR_Channel2 4 c
+dbsym l IR_Channel1 3 c
+dbsym l RED_Channel3 2 c
+dbsym l RED_Channel2 1 c
+dbsym l RED_Channel1 0 c
+dbline FFFFFFFF CE
+dbline 73 D2
+dbline 78 D2
+dbline 79 D9
+dbline 7B E2
+dbline 7C EA
+dbline 7D EF
+dbline 80 F6
+dbline 82 FE
+dbline 84 107
+dbline 86 110
+dbline 88 119
+dbline 8A 122
+dbline 8B 12B
+dbline 8D 12F
+dbline 8E 135
+dbline 8F 13C
+dbline 90 143
+dbline 92 149
+dbline 93 14F
+dbline 94 156
+dbline 95 15D
+dbline FFFFFFFE 164
+dbline 0 167
+dbfunc e blink 168 fV
+dbline FFFFFFFF 168
+dbline 98 168
+dbline 9B 168
+dbline 9C 16B
+dbline 9E 172
+dbline 9F 175
+dbline FFFFFFFE 17C
+dbline 0 17C
+dbfunc e main 17D fV
+dbsym l i 0 c
+dbline FFFFFFFF 17D
+dbline A3 181
+dbline A5 181
+dbline A6 184
+dbline A8 186
+dbline AA 188
+dbline AB 18F
+dbline AC 191
+dbline AD 198
+dbline AE 19A
+dbline AE 19F
+dbline AF 19F
+dbline B0 1A1
+dbline AE 1A1
+dbline AE 1A3
+dbline B1 1A8
+dbline B4 1AD
+dbline B5 1AD
+dbline B6 1AD
+dbline B4 1AD
+dbline B7 1B6
+dbline B9 1B8
+dbline B2 1B8
+dbline FFFFFFFE 1BA
+dbline 0 1BD
+S _main Def017D
+S _PO_HR_Sensor_reset Def00C3
+S _PO_HR_Sensor_read_reg Def003B
+S _blink Def0168
+S _i2c_init Def0000
+S _PO_HR_Sensor_read_fifo Def00CE
+S _PO_HR_Sensor_init Def0068
+S _PO_HR_Sensor_write_reg Def000C
+T 00 00 10 7C 00 00 7C 00 00 7C 00 00 20 7F 10 4F
+R 00 00 00 00 02 04 00 03 02 07 00 01 02 0A 00 09
+T 00 0E 10 57 00 50 57 7C 00 00 20 10 52 FC 7C
+R 00 00 00 00 02 08 00 02
+T 00 1B 00 00 20 10 52 FB 7C 00 00 7C 00 00 20 10
+R 00 00 00 00 02 02 00 08 02 09 00 08 02 0C 00 04
+T 00 29 7C 00 00 20 53 00 00 47 00 00 40 AF F5 10
+R 00 00 00 00 02 03 00 0B 03 07 00 05 03 0A 00 05
+T 00 35 7C 00 00 20 20 7F 10 4F 38 01 10 57 00 50
+R 00 00 00 00 02 03 00 07
+T 00 43 57 7C 00 00 20 10 52 FC 7C 00 00 57 01 50
+R 00 00 00 00 02 04 00 02 02 0B 00 08
+T 00 51 57 7C 00 00 50 00 7C 00 00 20 54 00 10 7C
+R 00 00 00 00 02 04 00 06 02 09 00 0D
+T 00 5F 00 00 20 52 00 38 FF 20 7F 50 C0 08 50 02
+R 00 00 00 00 02 02 00 04
+T 00 6D 08 9F 9C 50 00 08 50 03 08 9F 94 38 FC 50
+R 00 00 00 00
+T 00 7B 00 08 50 04 08 9F 8A 50 00 08 50 05 08 9F
+R 00 00 00 00
+T 00 89 82 38 FC 50 00 08 50 06 08 9F 78 50 0F 08
+R 00 00 00 00
+T 00 97 50 08 08 9F 70 38 FC 50 03 08 50 09 08 9F
+R 00 00 00 00
+T 00 A5 66 50 47 08 50 0A 08 9F 5E 38 FC 50 32 08
+R 00 00 00 00
+T 00 B3 50 0C 08 9F 54 50 32 08 50 0D 08 9F 4C 38
+R 00 00 00 00
+T 00 C1 FC 7F 50 40 08 50 09 08 9F 41 38 FE 7F 10
+R 00 00 00 00
+T 00 CF 4F 38 07 50 00 08 9F 64 54 06 50 01 08 9F
+R 00 00 00 00
+T 00 DD 5D 38 FE 54 06 10 57 00 50 57 7C 00 00 50
+R 00 00 00 00 02 0D 00 02
+T 00 EB 07 7C 00 00 57 01 50 57 7C 00 00 50 01 7C
+R 00 00 00 00 02 04 00 08 02 0B 00 06
+T 00 F9 00 00 20 54 00 10 50 01 7C 00 00 20 54 01
+R 00 00 00 00 02 02 00 0D 02 0B 00 0D
+T 01 07 10 50 01 7C 00 00 20 54 02 10 50 01 7C
+R 00 00 00 00 02 06 00 0D
+T 01 14 00 00 20 54 03 10 50 01 7C 00 00 20 54 04
+R 00 00 00 00 02 02 00 0D 02 0B 00 0D
+T 01 22 10 50 00 7C 00 00 20 54 05 10 7C 00 00 50
+R 00 00 00 00 02 06 00 0D 02 0D 00 04
+T 01 30 52 7C 00 00 20 10 52 00 7C 00 00 20 10 52
+R 00 00 00 00 02 04 00 0C 02 0B 00 0C
+T 01 3E 01 7C 00 00 20 10 52 02 7C 00 00 50 49 7C
+R 00 00 00 00 02 04 00 0C 02 0B 00 0C
+T 01 4C 00 00 20 10 52 03 7C 00 00 20 10 52 04 7C
+R 00 00 00 00 02 02 00 0C 02 09 00 0C
+T 01 5A 00 00 20 10 52 05 7C 00 00 20 38 F9 20 7F
+R 00 00 00 00 02 02 00 0C 02 09 00 0C
+T 01 68 41 00 EF 10 50 32 7C 00 00 20 43 00 10 10
+R 00 00 00 00 02 09 00 0A
+T 01 76 50 32 7C 00 00 20 7F 10 4F 38 01 56 00 00
+R 00 00 00 00 02 05 00 0A
+T 01 84 71 01 9E 78 10 50 00 7C 00 00 20 9F 32 10
+R 00 00 00 00 02 0A 00 00
+T 01 92 50 32 7C 00 00 20 9E CE 56 00 00 80 05 9F
+R 00 00 00 00 02 05 00 0A
+T 01 A0 C7 77 00 3D 00 0A CF F8 41 00 EF 80 0C 5D
+R 00 00 00 00
+T 01 AE 00 53 00 00 47 00 00 04 BF F8 9F 16 8F F4
+R 00 00 00 00 03 04 00 05 03 07 00 05
+T 01 BA 38 FF 20 8F FF
+R 00 00 00 00

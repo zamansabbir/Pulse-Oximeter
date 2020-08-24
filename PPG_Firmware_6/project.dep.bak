@@ -1,0 +1,38 @@
+# DO NOT DELETE
+./obj/boot.o : \
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8ssc.inc\
+   E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\lib\GlobalParams.inc\
+   E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\memory.inc
+./obj/delay.o : \
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.inc\
+   E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\memory.inc
+./obj/main.o :  ./lib/I2CHWCommon.h ./lib/I2CHWMstr.h ./lib/PSoCAPI.h\
+   ./lib/PSoCGPIOINT.h ./lib/UART.h\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.h\
+   E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\delay.h
+./lib/obj/i2chwcommon.o :  ./lib/I2CHWCommon.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.inc\
+   E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\memory.inc
+./lib/obj/i2chwint.o :  ./lib/I2CHWCommon.inc ./lib/I2CHWMstr.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.inc\
+   E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\memory.inc
+./lib/obj/i2chwmstr.o :  ./lib/I2CHWCommon.inc ./lib/I2CHWMstr.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.inc\
+   E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\memory.inc
+./lib/obj/i2chwrsrcinits.o :  ./lib/I2CHWCommon.inc ./lib/I2CHWMstr.inc\
+   ./lib/PSoCAPI.inc ./lib/PSoCGPIOINT.inc ./lib/UART.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.inc\
+   E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\memory.inc
+./lib/obj/psocconfig.o :  ./lib/GlobalParams.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.inc\
+   E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\memory.inc
+./lib/obj/psocconfigtbl.o : \
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.inc
+./lib/obj/uart.o :  ./lib/UART.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.inc\
+   E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\memory.inc
+./lib/obj/uartint.o :  ./lib/UART.inc\
+   C:/PROGRA~2/Cypress/PSOCDE~1/5.4/Common/CYPRES~1/tools/include/CY8C21~2/m8c.inc\
+   E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\memory.inc
+./lib/obj/uartplus.o : 

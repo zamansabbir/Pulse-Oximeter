@@ -1,0 +1,34 @@
+Starting MAKE...
+creating project.mk 
+
+lib/i2chwcommon.asm
+
+lib/i2chwint.asm
+
+lib/i2chwmstr.asm
+
+lib/i2chwrsrcinits.asm
+
+lib/psocconfig.asm
+
+lib/psocconfigtbl.asm
+
+lib/uart.asm
+
+lib/uartint.asm
+
+lib/uartplus.asm
+
+./boot.asm
+
+Linking..
+
+  ROM 56% full. 2266 out of 4096 bytes used (does not include absolute areas).
+
+  RAM 11% full. 27 bytes used (does not include stack usage).
+
+Built with ICCM8C STD V7.05.00
+
+ 
+PPG_Firmware_6 - 0 error(s) 0 warning(s) 18:04:45
+

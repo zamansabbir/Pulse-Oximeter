@@ -1,0 +1,609 @@
+                        .module main.c
+                        .area text(rom, con, rel)
+ 0000                   .dbfile ./main.c
+ 0000                   .dbfile E:\UofM\ESARP\Pulse_Oximetry_Device\PPG_6_Firmware\PPG_Firmware_6\PPG_Firmware_6\main.c
+ 0000                   .dbfunc e i2c_init _i2c_init fV
+ 0000           _i2c_init::
+ 0000                   .dbline -1
+ 0000                   .dbline 39
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; // C main line
+ 0000           ; //----------------------------------------------------------------------------
+ 0000           ; 
+ 0000           ; 
+ 0000           ; #include <m8c.h>        // part specific constants and macros
+ 0000           ; #include "PSoCAPI.h"    // PSoC API definitions for all User Modules
+ 0000           ; #include "delay.h"
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; 
+ 0000           ; #define I2C_DEV_ADDRESS 0x57 //Taking higher 7-bits from 0xAE. .automatically changes the address to 0xAE with read or write bit addition by the read write functions
+ 0000           ; 
+ 0000           ; //register addresses
+ 0000           ; #define REG_INTR_STATUS_1 0x00
+ 0000           ; #define REG_INTR_STATUS_2 0x01
+ 0000           ; #define REG_INTR_ENABLE_1 0x02
+ 0000           ; #define REG_INTR_ENABLE_2 0x03
+ 0000           ; #define REG_FIFO_WR_PTR 0x04
+ 0000           ; #define REG_OVF_COUNTER 0x05
+ 0000           ; #define REG_FIFO_RD_PTR 0x06
+ 0000           ; #define REG_FIFO_DATA 0x07
+ 0000           ; #define REG_FIFO_CONFIG 0x08
+ 0000           ; #define REG_MODE_CONFIG 0x09
+ 0000           ; #define REG_SPO2_CONFIG 0x0A
+ 0000           ; #define REG_LED1_PA 0x0C
+ 0000           ; #define REG_LED2_PA 0x0D
+ 0000           ; #define REG_PILOT_PA 0x10
+ 0000           ; #define REG_MULTI_LED_CTRL1 0x11
+ 0000           ; #define REG_MULTI_LED_CTRL2 0x12
+ 0000           ; #define REG_TEMP_INTR 0x1F
+ 0000           ; #define REG_TEMP_FRAC 0x20
+ 0000           ; #define REG_TEMP_CONFIG 0x21
+ 0000           ; #define REG_PROX_INT_THRESH 0x30
+ 0000           ; #define REG_REV_ID 0xFE
+ 0000           ; #define REG_PART_ID 0xFF
+ 0000           ; 
+ 0000           ; void i2c_init(void){
+ 0000                   .dbline 40
+ 0000           ;       I2CHW_Start();
+ 0000 10                push X
+ 0001 7C0000            xcall _I2CHW_Start
+ 0004                   .dbline 41
+ 0004           ;       I2CHW_EnableMstr();
+ 0004 7C0000            xcall _I2CHW_EnableMstr
+ 0007                   .dbline 42
+ 0007           ;       I2CHW_EnableInt();
+ 0007 7C0000            xcall _I2CHW_EnableInt
+ 000A 20                pop X
+ 000B                   .dbline -2
+ 000B           L1:
+ 000B                   .dbline 0 ; func end
+ 000B 7F                ret
+ 000C                   .dbend
+ 000C                   .dbfunc e PO_HR_Sensor_write_reg _PO_HR_Sensor_write_reg fV
+ 000C           ;           data -> X-5
+ 000C           ;           addr -> X-4
+ 000C           _PO_HR_Sensor_write_reg::
+ 000C                   .dbline -1
+ 000C 10                push X
+ 000D 4F                mov X,SP
+ 000E                   .dbline 52
+ 000E           ;       
+ 000E           ; }
+ 000E           ; 
+ 000E           ; /**
+ 000E           ; *\ This function writes the content of a particular registers
+ 000E           ; *\ parameter addr             -Register address
+ 000E           ; *\parameter data              -the content to be written in the register
+ 000E           ; *\return value                        -None
+ 000E           ; */
+ 000E           ; void PO_HR_Sensor_write_reg(BYTE addr, BYTE data){
+ 000E                   .dbline 53
+ 000E           ;       I2CHW_fSendStart(I2C_DEV_ADDRESS, I2CHW_WRITE);
+ 000E 10                push X
+ 000F 5700              mov X,0
+ 0011 5057              mov A,87
+ 0013 7C0000            xcall _I2CHW_fSendStart
+ 0016 20                pop X
+ 0017                   .dbline 54
+ 0017           ;       I2CHW_fWrite(addr);
+ 0017 10                push X
+ 0018 52FC              mov A,[X-4]
+ 001A 7C0000            xcall _I2CHW_fWrite
+ 001D 20                pop X
+ 001E                   .dbline 55
+ 001E           ;       I2CHW_fWrite(data);
+ 001E 10                push X
+ 001F 52FB              mov A,[X-5]
+ 0021 7C0000            xcall _I2CHW_fWrite
+ 0024                   .dbline 56
+ 0024           ;       I2CHW_SendStop();
+ 0024 7C0000            xcall _I2CHW_SendStop
+ 0027 20                pop X
+ 0028           L3:
+ 0028                   .dbline 58
+ 0028           ;       //adding extra for caution, if does not work, remove it
+ 0028           ;       while (!(I2CHW_bReadBusStatus()&I2CHW_WR_COMPLETE));
+ 0028           L4:
+ 0028                   .dbline 58
+ 0028 10                push X
+ 0029 7C0000            xcall _I2CHW_bReadBusStatus
+ 002C 20                pop X
+ 002D 5300              mov [__r0],A
+ 002F 470040            tst [__r0],64
+ 0032 AFF5              jz L3
+ 0034                   .dbline 59
+ 0034           ;       I2CHW_ClrWrStatus();
+ 0034 10                push X
+ 0035 7C0000            xcall _I2CHW_ClrWrStatus
+ 0038 20                pop X
+ 0039                   .dbline -2
+ 0039           L2:
+ 0039 20                pop X
+ 003A                   .dbline 0 ; func end
+ 003A 7F                ret
+ 003B                   .dbsym l data -5 c
+ 003B                   .dbsym l addr -4 c
+ 003B                   .dbend
+ 003B                   .dbfunc e PO_HR_Sensor_read_reg _PO_HR_Sensor_read_reg fc
+ 003B           ;           data -> X+0
+ 003B           ;           addr -> X-4
+ 003B           _PO_HR_Sensor_read_reg::
+ 003B                   .dbline -1
+ 003B 10                push X
+ 003C 4F                mov X,SP
+ 003D 3801              add SP,1
+ 003F                   .dbline 67
+ 003F           ; }
+ 003F           ; 
+ 003F           ; /**
+ 003F           ; *\ This function reads the content of a particular registers
+ 003F           ; *\ parameter addr     -Register address
+ 003F           ; *\return value                -the content of the register
+ 003F           ; */
+ 003F           ; BYTE PO_HR_Sensor_read_reg(BYTE addr){
+ 003F                   .dbline 69
+ 003F           ;       BYTE data;
+ 003F           ;       I2CHW_fSendStart(I2C_DEV_ADDRESS, I2CHW_WRITE);
+ 003F 10                push X
+ 0040 5700              mov X,0
+ 0042 5057              mov A,87
+ 0044 7C0000            xcall _I2CHW_fSendStart
+ 0047 20                pop X
+ 0048                   .dbline 70
+ 0048           ;       I2CHW_fWrite(addr);
+ 0048 10                push X
+ 0049 52FC              mov A,[X-4]
+ 004B 7C0000            xcall _I2CHW_fWrite
+ 004E                   .dbline 71
+ 004E           ;       I2CHW_fSendRepeatStart(I2C_DEV_ADDRESS,I2CHW_READ);
+ 004E 5701              mov X,1
+ 0050 5057              mov A,87
+ 0052 7C0000            xcall _I2CHW_fSendRepeatStart
+ 0055                   .dbline 72
+ 0055           ;       data=I2CHW_bRead(I2CHW_NAKslave); //send NAK 
+ 0055 5000              mov A,0
+ 0057 7C0000            xcall _I2CHW_bRead
+ 005A 20                pop X
+ 005B 5400              mov [X+0],A
+ 005D                   .dbline 73
+ 005D           ;       I2CHW_SendStop();
+ 005D 10                push X
+ 005E 7C0000            xcall _I2CHW_SendStop
+ 0061 20                pop X
+ 0062                   .dbline 77
+ 0062           ;               //adding extra for caution, if does not work, remove it
+ 0062           ;       //while (!(I2CHW_bReadBusStatus()&I2CHW_RD_COMPLETE));
+ 0062           ;       //I2CHW_ClrRdStatus();
+ 0062           ;       return data;
+ 0062 5200              mov A,[X+0]
+ 0064                   .dbline -2
+ 0064           L6:
+ 0064 38FF              add SP,-1
+ 0066 20                pop X
+ 0067                   .dbline 0 ; func end
+ 0067 7F                ret
+ 0068                   .dbsym l data 0 c
+ 0068                   .dbsym l addr -4 c
+ 0068                   .dbend
+ 0068                   .dbfunc e PO_HR_Sensor_init _PO_HR_Sensor_init fV
+ 0068           _PO_HR_Sensor_init::
+ 0068                   .dbline -1
+ 0068                   .dbline 85
+ 0068           ; }
+ 0068           ; 
+ 0068           ; /**
+ 0068           ; *\ This function initializes the Pulse oximeter and Heart Rate Sensor with the initial value
+ 0068           ; *\ parameter          -None
+ 0068           ; *\return value                -None
+ 0068           ; */
+ 0068           ; void PO_HR_Sensor_init(void){
+ 0068                   .dbline 87
+ 0068           ; 
+ 0068           ;       PO_HR_Sensor_write_reg(REG_INTR_ENABLE_1,0xc0); //INTR setting
+ 0068 50C0              mov A,-64
+ 006A 08                push A
+ 006B 5002              mov A,2
+ 006D 08                push A
+ 006E 9F9C              xcall _PO_HR_Sensor_write_reg
+ 0070                   .dbline 88
+ 0070           ;       PO_HR_Sensor_write_reg(REG_INTR_ENABLE_2,0x00); //INTR setting
+ 0070 5000              mov A,0
+ 0072 08                push A
+ 0073 5003              mov A,3
+ 0075 08                push A
+ 0076 9F94              xcall _PO_HR_Sensor_write_reg
+ 0078 38FC              add SP,-4
+ 007A                   .dbline 89
+ 007A           ;       PO_HR_Sensor_write_reg(REG_FIFO_WR_PTR,0x00);//FIFO_WR_PTR
+ 007A 5000              mov A,0
+ 007C 08                push A
+ 007D 5004              mov A,4
+ 007F 08                push A
+ 0080 9F8A              xcall _PO_HR_Sensor_write_reg
+ 0082                   .dbline 90
+ 0082           ;       PO_HR_Sensor_write_reg(REG_OVF_COUNTER,0x00);//OVF_Counter
+ 0082 5000              mov A,0
+ 0084 08                push A
+ 0085 5005              mov A,5
+ 0087 08                push A
+ 0088 9F82              xcall _PO_HR_Sensor_write_reg
+ 008A 38FC              add SP,-4
+ 008C                   .dbline 91
+ 008C           ;       PO_HR_Sensor_write_reg(REG_FIFO_RD_PTR,0x00);//FIFO_RD_PTR
+ 008C 5000              mov A,0
+ 008E 08                push A
+ 008F 5006              mov A,6
+ 0091 08                push A
+ 0092 9F78              xcall _PO_HR_Sensor_write_reg
+ 0094                   .dbline 92
+ 0094           ;       PO_HR_Sensor_write_reg(REG_FIFO_CONFIG,0x0f);//sample average=4(010), fifo rollover=false, fifo almost full=17, now sample average=1
+ 0094 500F              mov A,15
+ 0096 08                push A
+ 0097 5008              mov A,8
+ 0099 08                push A
+ 009A 9F70              xcall _PO_HR_Sensor_write_reg
+ 009C 38FC              add SP,-4
+ 009E                   .dbline 93
+ 009E           ;       PO_HR_Sensor_write_reg(REG_MODE_CONFIG,0x03); //0x02 for red only, 0x03 for spo2 mode, 0x07 multimode LED
+ 009E 5003              mov A,3
+ 00A0 08                push A
+ 00A1 5009              mov A,9
+ 00A3 08                push A
+ 00A4 9F66              xcall _PO_HR_Sensor_write_reg
+ 00A6                   .dbline 94
+ 00A6           ;       PO_HR_Sensor_write_reg(REG_SPO2_CONFIG,0x47); // SPO2_ADC range=8192 nA, SPO2 sampling rate 100 Hz, pulse width of LED= 411uS
+ 00A6 5047              mov A,71
+ 00A8 08                push A
+ 00A9 500A              mov A,10
+ 00AB 08                push A
+ 00AC 9F5E              xcall _PO_HR_Sensor_write_reg
+ 00AE 38FC              add SP,-4
+ 00B0                   .dbline 95
+ 00B0           ;       PO_HR_Sensor_write_reg(REG_LED1_PA,0x32); //LED 1=7mA (0x24),0x3F=12.6mA,0x32=10mA 
+ 00B0 5032              mov A,50
+ 00B2 08                push A
+ 00B3 500C              mov A,12
+ 00B5 08                push A
+ 00B6 9F54              xcall _PO_HR_Sensor_write_reg
+ 00B8                   .dbline 96
+ 00B8           ;       PO_HR_Sensor_write_reg(REG_LED2_PA,0x32);//LED 2=7mA(0x24),0x3F=12.6mA,0x32=10mA
+ 00B8 5032              mov A,50
+ 00BA 08                push A
+ 00BB 500D              mov A,13
+ 00BD 08                push A
+ 00BE 9F4C              xcall _PO_HR_Sensor_write_reg
+ 00C0 38FC              add SP,-4
+ 00C2                   .dbline -2
+ 00C2           L7:
+ 00C2                   .dbline 0 ; func end
+ 00C2 7F                ret
+ 00C3                   .dbend
+ 00C3                   .dbfunc e PO_HR_Sensor_reset _PO_HR_Sensor_reset fV
+ 00C3           _PO_HR_Sensor_reset::
+ 00C3                   .dbline -1
+ 00C3                   .dbline 105
+ 00C3           ;       //PO_HR_Sensor_write_reg(REG_PILOT_PA,0x7f);//Pilot LED =25mA
+ 00C3           ;       
+ 00C3           ; }
+ 00C3           ; /**
+ 00C3           ; *\ This function resets the Pulse oximeter and Heart Rate Sensor 
+ 00C3           ; *\ parameter          -None
+ 00C3           ; *\return value                -None
+ 00C3           ; */
+ 00C3           ; void  PO_HR_Sensor_reset(void){
+ 00C3                   .dbline 106
+ 00C3           ;       PO_HR_Sensor_write_reg(REG_MODE_CONFIG,0x40);
+ 00C3 5040              mov A,64
+ 00C5 08                push A
+ 00C6 5009              mov A,9
+ 00C8 08                push A
+ 00C9 9F41              xcall _PO_HR_Sensor_write_reg
+ 00CB 38FE              add SP,-2
+ 00CD                   .dbline -2
+ 00CD           L8:
+ 00CD                   .dbline 0 ; func end
+ 00CD 7F                ret
+ 00CE                   .dbend
+ 00CE                   .dbfunc e PO_HR_Sensor_read_fifo _PO_HR_Sensor_read_fifo fV
+ 00CE           ;       uch_temp -> X+6
+ 00CE           ;    IR_Channel3 -> X+5
+ 00CE           ;    IR_Channel2 -> X+4
+ 00CE           ;    IR_Channel1 -> X+3
+ 00CE           ;   RED_Channel3 -> X+2
+ 00CE           ;   RED_Channel2 -> X+1
+ 00CE           ;   RED_Channel1 -> X+0
+ 00CE           _PO_HR_Sensor_read_fifo::
+ 00CE                   .dbline -1
+ 00CE 10                push X
+ 00CF 4F                mov X,SP
+ 00D0 3807              add SP,7
+ 00D2                   .dbline 115
+ 00D2           ;       
+ 00D2           ; }
+ 00D2           ; 
+ 00D2           ; 
+ 00D2           ; /**
+ 00D2           ; *\ This function reads 6 bytes of sample data from FIFO_DATA. 3 bytes for IR channel and 3 bytes for Red channel
+ 00D2           ; *\ parameter none
+ 00D2           ; */
+ 00D2           ; void PO_HR_Sensor_read_fifo(void){
+ 00D2                   .dbline 120
+ 00D2           ; 
+ 00D2           ;       //INT IR_Channel=0,RED_Channel=0,temp=0;
+ 00D2           ;       BYTE RED_Channel1,RED_Channel2,RED_Channel3,IR_Channel1,IR_Channel2,IR_Channel3;
+ 00D2           ;       BYTE uch_temp;
+ 00D2           ;       uch_temp=PO_HR_Sensor_read_reg(REG_INTR_STATUS_1);
+ 00D2 5000              mov A,0
+ 00D4 08                push A
+ 00D5 9F64              xcall _PO_HR_Sensor_read_reg
+ 00D7 5406              mov [X+6],A
+ 00D9                   .dbline 121
+ 00D9           ;       uch_temp=PO_HR_Sensor_read_reg(REG_INTR_STATUS_2);
+ 00D9 5001              mov A,1
+ 00DB 08                push A
+ 00DC 9F5D              xcall _PO_HR_Sensor_read_reg
+ 00DE 38FE              add SP,-2
+ 00E0 5406              mov [X+6],A
+ 00E2                   .dbline 123
+ 00E2           ;       
+ 00E2           ;       I2CHW_fSendStart(I2C_DEV_ADDRESS, I2CHW_WRITE);
+ 00E2 10                push X
+ 00E3 5700              mov X,0
+ 00E5 5057              mov A,87
+ 00E7 7C0000            xcall _I2CHW_fSendStart
+ 00EA                   .dbline 124
+ 00EA           ;       I2CHW_fWrite(REG_FIFO_DATA);
+ 00EA 5007              mov A,7
+ 00EC 7C0000            xcall _I2CHW_fWrite
+ 00EF                   .dbline 125
+ 00EF           ;       I2CHW_fSendRepeatStart(I2C_DEV_ADDRESS,I2CHW_READ);
+ 00EF 5701              mov X,1
+ 00F1 5057              mov A,87
+ 00F3 7C0000            xcall _I2CHW_fSendRepeatStart
+ 00F6                   .dbline 128
+ 00F6           ; 
+ 00F6           ;       
+ 00F6           ;       RED_Channel1=I2CHW_bRead(I2CHW_ACKslave);
+ 00F6 5001              mov A,1
+ 00F8 7C0000            xcall _I2CHW_bRead
+ 00FB 20                pop X
+ 00FC 5400              mov [X+0],A
+ 00FE                   .dbline 130
+ 00FE           ; 
+ 00FE           ;       RED_Channel2=I2CHW_bRead(I2CHW_ACKslave);
+ 00FE 10                push X
+ 00FF 5001              mov A,1
+ 0101 7C0000            xcall _I2CHW_bRead
+ 0104 20                pop X
+ 0105 5401              mov [X+1],A
+ 0107                   .dbline 132
+ 0107           ; 
+ 0107           ;       RED_Channel3=I2CHW_bRead(I2CHW_ACKslave);
+ 0107 10                push X
+ 0108 5001              mov A,1
+ 010A 7C0000            xcall _I2CHW_bRead
+ 010D 20                pop X
+ 010E 5402              mov [X+2],A
+ 0110                   .dbline 134
+ 0110           ; 
+ 0110           ;       IR_Channel1=I2CHW_bRead(I2CHW_ACKslave);
+ 0110 10                push X
+ 0111 5001              mov A,1
+ 0113 7C0000            xcall _I2CHW_bRead
+ 0116 20                pop X
+ 0117 5403              mov [X+3],A
+ 0119                   .dbline 136
+ 0119           ; 
+ 0119           ;       IR_Channel2=I2CHW_bRead(I2CHW_ACKslave);
+ 0119 10                push X
+ 011A 5001              mov A,1
+ 011C 7C0000            xcall _I2CHW_bRead
+ 011F 20                pop X
+ 0120 5404              mov [X+4],A
+ 0122                   .dbline 138
+ 0122           ; 
+ 0122           ;       IR_Channel3=I2CHW_bRead(I2CHW_NAKslave);
+ 0122 10                push X
+ 0123 5000              mov A,0
+ 0125 7C0000            xcall _I2CHW_bRead
+ 0128 20                pop X
+ 0129 5405              mov [X+5],A
+ 012B                   .dbline 139
+ 012B           ;       I2CHW_SendStop();
+ 012B 10                push X
+ 012C 7C0000            xcall _I2CHW_SendStop
+ 012F                   .dbline 141
+ 012F           ; 
+ 012F           ;       UART_PutChar('R');
+ 012F 5052              mov A,82
+ 0131 7C0000            xcall _UART_PutChar
+ 0134 20                pop X
+ 0135                   .dbline 142
+ 0135           ;       UART_PutChar(RED_Channel1);
+ 0135 10                push X
+ 0136 5200              mov A,[X+0]
+ 0138 7C0000            xcall _UART_PutChar
+ 013B 20                pop X
+ 013C                   .dbline 143
+ 013C           ;       UART_PutChar(RED_Channel2);
+ 013C 10                push X
+ 013D 5201              mov A,[X+1]
+ 013F 7C0000            xcall _UART_PutChar
+ 0142 20                pop X
+ 0143                   .dbline 144
+ 0143           ;       UART_PutChar(RED_Channel3);
+ 0143 10                push X
+ 0144 5202              mov A,[X+2]
+ 0146 7C0000            xcall _UART_PutChar
+ 0149                   .dbline 146
+ 0149           ;       
+ 0149           ;       UART_PutChar('I');
+ 0149 5049              mov A,73
+ 014B 7C0000            xcall _UART_PutChar
+ 014E 20                pop X
+ 014F                   .dbline 147
+ 014F           ;       UART_PutChar(IR_Channel1);
+ 014F 10                push X
+ 0150 5203              mov A,[X+3]
+ 0152 7C0000            xcall _UART_PutChar
+ 0155 20                pop X
+ 0156                   .dbline 148
+ 0156           ;       UART_PutChar(IR_Channel2);
+ 0156 10                push X
+ 0157 5204              mov A,[X+4]
+ 0159 7C0000            xcall _UART_PutChar
+ 015C 20                pop X
+ 015D                   .dbline 149
+ 015D           ;       UART_PutChar(IR_Channel3);
+ 015D 10                push X
+ 015E 5205              mov A,[X+5]
+ 0160 7C0000            xcall _UART_PutChar
+ 0163 20                pop X
+ 0164                   .dbline -2
+ 0164           L9:
+ 0164 38F9              add SP,-7
+ 0166 20                pop X
+ 0167                   .dbline 0 ; func end
+ 0167 7F                ret
+ 0168                   .dbsym l uch_temp 6 c
+ 0168                   .dbsym l IR_Channel3 5 c
+ 0168                   .dbsym l IR_Channel2 4 c
+ 0168                   .dbsym l IR_Channel1 3 c
+ 0168                   .dbsym l RED_Channel3 2 c
+ 0168                   .dbsym l RED_Channel2 1 c
+ 0168                   .dbsym l RED_Channel1 0 c
+ 0168                   .dbend
+ 0168                   .dbfunc e blink _blink fV
+ 0168           _blink::
+ 0168                   .dbline -1
+ 0168                   .dbline 152
+ 0168           ;       }
+ 0168           ; 
+ 0168           ; void blink(void){
+ 0168                   .dbline 155
+ 0168           ; 
+ 0168           ;               //UART_PutChar('1');
+ 0168           ;               LED_Data_ADDR&=~LED_MASK;
+ 0168 4100EF            and REG[0],-17
+ 016B                   .dbline 156
+ 016B           ;               Delay10msTimes(50);
+ 016B 10                push X
+ 016C 5032              mov A,50
+ 016E 7C0000            xcall _Delay10msTimes
+ 0171 20                pop X
+ 0172                   .dbline 158
+ 0172           ;               //UART_PutChar('0');
+ 0172           ;               LED_Data_ADDR|=LED_MASK;
+ 0172 430010            or REG[0],16
+ 0175                   .dbline 159
+ 0175           ;               Delay10msTimes(50);
+ 0175 10                push X
+ 0176 5032              mov A,50
+ 0178 7C0000            xcall _Delay10msTimes
+ 017B 20                pop X
+ 017C                   .dbline -2
+ 017C           L10:
+ 017C                   .dbline 0 ; func end
+ 017C 7F                ret
+ 017D                   .dbend
+ 017D                   .dbfunc e main _main fV
+ 017D           ;              i -> X+0
+ 017D           _main::
+ 017D                   .dbline -1
+ 017D 10                push X
+ 017E 4F                mov X,SP
+ 017F 3801              add SP,1
+ 0181                   .dbline 163
+ 0181           ; 
+ 0181           ; }
+ 0181           ; void main(void)
+ 0181           ; {     
+ 0181                   .dbline 165
+ 0181           ;       //INT i=0x1234;
+ 0181           ;       BYTE i=0;
+ 0181 560000            mov [X+0],0
+ 0184                   .dbline 166
+ 0184           ;        M8C_EnableGInt ; // Uncomment this line to enable Global Interrupts
+ 0184 7101                      or  F, 01h
+ 0186           
+ 0186                   .dbline 168
+ 0186           ;       // Insert your main routine code here.
+ 0186           ;       i2c_init();
+ 0186 9E78              xcall _i2c_init
+ 0188                   .dbline 170
+ 0188           ;       
+ 0188           ;       UART_Start(UART_PARITY_NONE);
+ 0188 10                push X
+ 0189 5000              mov A,0
+ 018B 7C0000            xcall _UART_Start
+ 018E 20                pop X
+ 018F                   .dbline 171
+ 018F           ;       PO_HR_Sensor_reset();           
+ 018F 9F32              xcall _PO_HR_Sensor_reset
+ 0191                   .dbline 172
+ 0191           ;       Delay10msTimes(50);
+ 0191 10                push X
+ 0192 5032              mov A,50
+ 0194 7C0000            xcall _Delay10msTimes
+ 0197 20                pop X
+ 0198                   .dbline 173
+ 0198           ;       PO_HR_Sensor_init(); 
+ 0198 9ECE              xcall _PO_HR_Sensor_init
+ 019A                   .dbline 174
+ 019A           ;       for (i=0;i<10;i++){
+ 019A 560000            mov [X+0],0
+ 019D 8005              xjmp L15
+ 019F           L12:
+ 019F                   .dbline 174
+ 019F                   .dbline 175
+ 019F           ;               blink();
+ 019F 9FC7              xcall _blink
+ 01A1                   .dbline 176
+ 01A1           ;       }
+ 01A1           L13:
+ 01A1                   .dbline 174
+ 01A1 7700              inc [X+0]
+ 01A3           L15:
+ 01A3                   .dbline 174
+ 01A3 3D000A            cmp [X+0],10
+ 01A6 CFF8              jc L12
+ 01A8           X1:
+ 01A8                   .dbline 177
+ 01A8           ;       LED_Data_ADDR&=~LED_MASK;
+ 01A8 4100EF            and REG[0],-17
+ 01AB 800C              xjmp L17
+ 01AD           L19:
+ 01AD                   .dbline 180
+ 01AD           ;       while (1){
+ 01AD           ; 
+ 01AD           ;               while ((INT_Pin_Data_ADDR&INT_Pin_MASK)){
+ 01AD                   .dbline 181
+ 01AD           ;               ;
+ 01AD                   .dbline 182
+ 01AD           ;               }
+ 01AD           L20:
+ 01AD                   .dbline 180
+ 01AD 5D00              mov A,REG[0]
+ 01AF 5300              mov [__r0],A
+ 01B1 470004            tst [__r0],4
+ 01B4 BFF8              jnz L19
+ 01B6                   .dbline 183
+ 01B6           ;                       PO_HR_Sensor_read_fifo();
+ 01B6 9F16              xcall _PO_HR_Sensor_read_fifo
+ 01B8                   .dbline 185
+ 01B8           ;       
+ 01B8           ;       }
+ 01B8           L17:
+ 01B8                   .dbline 178
+ 01B8 8FF4              xjmp L20
+ 01BA           X0:
+ 01BA                   .dbline -2
+ 01BA           L11:
+ 01BA 38FF              add SP,-1
+ 01BC 20                pop X
+ 01BD                   .dbline 0 ; func end
+ 01BD 8FFF              jmp .
+ 01BF                   .dbsym l i 0 c
+ 01BF                   .dbend

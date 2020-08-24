@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name PPG_Cypress_target)(type KiCad)(uri E:/UofM/ESARP/PPG_device/PPG_home/PPG_Cypress_target)(options "")(descr ""))
+  (lib (name ScannerFootPrint)(type KiCad)(uri E:/UofM/ESARP/NSF_Scanner/My_designs/4th_revision/Final_4th_revision/ProjectFootprint/ScannerFootPrint.pretty)(options "")(descr ""))
+)
